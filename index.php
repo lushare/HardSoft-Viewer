@@ -234,27 +234,28 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 
      <fieldset>
      <legend>配置信息</legend>
-	 <div><label for="Name">系統:<?php echo $value['OS'];?></label><br/></div>
-	 <div><label for="Name">CPU:<?php echo $value['CPU'];?></label><br/></div>
+	 <div><label for="Name">系 統:<?php echo $value['OS'];?></label><br/></div>
+	 <div><label for="Name">CPU&nbsp :<?php echo $value['CPU'];?></label><br/></div>
 	 <div><label for="Name">內 存:<?php echo $value['STAND_Ram'];?></label><br/></div>
 	 <div><label for="Name">顯 卡:<?php echo $value['Display_Card'];?></label><br/></div>
 	 <div><label for="Name">主 板:<?php echo $value['MotherBoard_Type'];?></label><br/></div>
 	 <div><label for="Name">硬 盤:<?php echo $value['HardDisk_Type'];?></label><br/></div>
 	 <div><label for="Name">大 小:<?php echo $value['STAND_HD_Size'];?></label><br/></div>
 	 <div><label for="Name">網 卡:<?php echo $value['NetCard_Type'];?></label><br/></div>
-     <div><label for="Name">MAC:<?php echo $value['MAC_Address'];?></label><br/></div>
-	 <div><label for="Name">IP:<?php echo $value['IP_Address'];?></label><br/></div>
+     <div><label for="Name">MAC&nbsp :<?php echo $value['MAC_Address'];?></label><br/></div>
+	 <div><label for="Name">IP &nbsp :<?php echo $value['IP_Address'];?></label><br/></div>
+	 <div><label for="Name">掃描時間:<?php echo $value['ScanTime'];?></label><br/></div>
      </fieldset>
 	 <br/>
 	 <fieldset>
 	<legend>權限信息</legend>
 	<div><label for="Name">管 理 員 組:<?php echo $value['Admin'];?></label><br/></div>
-	<div><label for="Name">PowerUser:<?php echo $value['Poweruser'];?></label><br/></div>
+	<div><label for="Name">PowerUser組:<?php echo $value['Poweruser'];?></label><br/></div>
 	<div><label for="Name">USB 存 儲:<?php echo $value['USB'];?></label><br/></div>
 	</fieldset>
 	<br/>
 	<fieldset>
-	<legend>版權軟件信息</legend>
+	<legend>版權軟件</legend>
 	<?php
 	$softsql="SELECT * FROM Get_Soft WHERE id='".$value['id']."'";
 	$soft=$conn->select($softsql);
@@ -268,6 +269,20 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 	?>
 	<input name="select" type="button" class="buttom" value="所有軟件" onclick="location.href='?id=<?php echo $value['id']; ?>&action=getsoftlist'" />
 	</fieldset><br/>
+        <fieldset>
+        <legend>共享信息</legend>
+        <?php
+        $sharesql="SELECT * FROM Share WHERE id='".$value['id']."'";
+        $share=$conn->select($sharesql);
+        if ($share){
+                foreach($share as $k=>$v){
+        ?>
+        <div><label for="Name"><?php echo ($k+1).'、'.$v['Share']; ?></label><br/></div>
+        <?php
+                }
+        }
+        ?>
+        </fieldset>
 
  </div>
 <?php
@@ -431,27 +446,28 @@ if($data){
 
      <fieldset>
      <legend>配置信息</legend>
-	 <div><label for="Name">系統:<?php echo $value['OS'];?></label><br/></div>
-	 <div><label for="Name">CPU:<?php echo $value['CPU'];?></label><br/></div>
+	 <div><label for="Name">系 統:<?php echo $value['OS'];?></label><br/></div>
+	 <div><label for="Name">CPU&nbsp :<?php echo $value['CPU'];?></label><br/></div>
 	 <div><label for="Name">內 存:<?php echo $value['STAND_Ram'];?></label><br/></div>
 	 <div><label for="Name">顯 卡:<?php echo $value['Display_Card'];?></label><br/></div>
 	 <div><label for="Name">主 板:<?php echo $value['MotherBoard_Type'];?></label><br/></div>
 	 <div><label for="Name">硬 盤:<?php echo $value['HardDisk_Type'];?></label><br/></div>
 	 <div><label for="Name">大 小:<?php echo $value['STAND_HD_Size'];?></label><br/></div>
 	 <div><label for="Name">網 卡:<?php echo $value['NetCard_Type'];?></label><br/></div>
-     <div><label for="Name">MAC:<?php echo $value['MAC_Address'];?></label><br/></div>
-	 <div><label for="Name">IP:<?php echo $value['IP_Address'];?></label><br/></div>
+     <div><label for="Name">MAC&nbsp :<?php echo $value['MAC_Address'];?></label><br/></div>
+	 <div><label for="Name">IP &nbsp :<?php echo $value['IP_Address'];?></label><br/></div>
+	 <div><label for="Name">掃描時間:<?php echo $value['ScanTime'];?></label><br/></div>
      </fieldset>
 	 <br/>
 	 <fieldset>
 	<legend>權限信息</legend>
 	<div><label for="Name">管 理 員 組:<?php echo $value['Admin'];?></label><br/></div>
-	<div><label for="Name">PowerUser:<?php echo $value['Poweruser'];?></label><br/></div>
+	<div><label for="Name">PowerUser組:<?php echo $value['Poweruser'];?></label><br/></div>
 	<div><label for="Name">USB 存 儲:<?php echo $value['USB'];?></label><br/></div>
 	</fieldset>
 	<br/>
 	<fieldset>
-	<legend>版權軟件信息</legend>
+	<legend>版權軟件</legend>
 	<?php
 	$softsql="SELECT * FROM Get_Soft WHERE id='".$value['id']."'";
 	$soft=$conn->select($softsql);
@@ -464,7 +480,22 @@ if($data){
 	}
 	?>
 	<input name="select" type="button" class="buttom" value="所有軟件" onclick="location.href='?id=<?php echo $value['id']; ?>&action=getsoftlist'" />
-	</fieldset>
+	</fieldset><br />
+	<fieldset>
+        <legend>共享信息</legend>
+        <?php
+        $sharesql="SELECT * FROM Share WHERE id='".$value['id']."'";
+        $share=$conn->select($sharesql);
+        if ($share){
+                foreach($share as $k=>$v){
+        ?>
+        <div><label for="Name"><?php echo ($k+1).'、'.$v['Share']; ?></label><br/></div>
+        <?php
+                }
+        }
+        ?>
+        </fieldset>
+
  </div>
  <?php
 		}
@@ -474,4 +505,5 @@ if($data){
  ?>
  </body>
  </html>
+
 
